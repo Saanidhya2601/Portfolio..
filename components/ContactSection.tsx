@@ -51,8 +51,6 @@ export default function ContactSection() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
-  // Mouse-tracked specular highlight — same spring-physics technique used
-  // throughout the site (see ShapeGridBackground's cursor spotlight).
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const mouseXSpring = useSpring(mouseX, { stiffness: 100, damping: 20 });
@@ -82,7 +80,10 @@ export default function ContactSection() {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center px-4">
+    <section
+      id="contact"
+      className="flex w-full flex-col items-center justify-center px-4 py-20"
+    >
       <div className="mb-10 text-center">
         <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
           Get in touch
@@ -101,10 +102,10 @@ export default function ContactSection() {
         className="group relative grid w-full max-w-4xl grid-cols-1 overflow-hidden rounded-3xl border border-line bg-panel/60 shadow-2xl backdrop-blur-xl md:grid-cols-5"
       >
         <motion.div
-          className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition duration-300 group-hover:opacity-100"
+          className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition duration-300 group-hover:opacity-100 z-0"
           style={{ background: spotlight }}
         />
-        <div className="absolute inset-0 rounded-3xl border border-white/5" />
+        <div className="absolute inset-0 rounded-3xl border border-white/5 pointer-events-none" />
 
         {/* Direct contact details */}
         <div className="relative z-10 flex flex-col justify-between gap-8 border-b border-line bg-white/[0.02] p-8 md:col-span-2 md:border-b-0 md:border-r">
@@ -113,8 +114,8 @@ export default function ContactSection() {
               Contact details
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-muted">
-              Open to full-stack roles and freelance work. Reach out directly or
-              send a message.
+              Open to full-stack roles and challenging architectural problems.
+              Reach out directly or send a message.
             </p>
           </div>
           <ul className="space-y-4">
@@ -159,7 +160,7 @@ export default function ContactSection() {
               </p>
               <button
                 onClick={() => setIsSubmitted(false)}
-                className="font-mono text-xs uppercase tracking-wider text-signal underline underline-offset-4"
+                className="font-mono text-xs uppercase tracking-wider text-signal underline underline-offset-4 hover:text-signal-dim transition-colors"
               >
                 Send another
               </button>
@@ -169,8 +170,10 @@ export default function ContactSection() {
               <div className="space-y-4">
                 <Field
                   icon={<User className="h-4 w-4" />}
+                  id="user-name"
                   type="text"
                   placeholder="Your name"
+                  aria-label="Your name"
                   required
                   value={form.name}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -179,8 +182,10 @@ export default function ContactSection() {
                 />
                 <Field
                   icon={<Mail className="h-4 w-4" />}
+                  id="user-email"
                   type="email"
                   placeholder="Email address"
+                  aria-label="Email address"
                   required
                   value={form.email}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -188,15 +193,19 @@ export default function ContactSection() {
                   }
                 />
                 <div className="relative">
+                  <label htmlFor="user-message" className="sr-only">
+                    Tell me about your project
+                  </label>
                   <MessageSquare className="absolute left-4 top-4 h-4 w-4 text-faint" />
                   <textarea
+                    id="user-message"
                     rows={5}
                     required
                     value={form.message}
                     onChange={(e) =>
                       setForm({ ...form, message: e.target.value })
                     }
-                    className="w-full rounded-xl border border-line bg-white/5 py-3 pl-11 pr-4 text-ink placeholder-faint transition-all focus:border-signal/50 focus:outline-none"
+                    className="w-full rounded-xl border border-line bg-white/5 py-3 pl-11 pr-4 text-ink placeholder-faint transition-all focus:border-signal focus:ring-1 focus:ring-signal/50 focus:outline-none resize-none"
                     placeholder="Tell me about your project..."
                   />
                 </div>
@@ -204,7 +213,7 @@ export default function ContactSection() {
 
               <button
                 type="submit"
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-ink py-4 font-semibold text-void transition-colors hover:bg-white"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-ink py-4 font-semibold text-void transition-all hover:bg-white hover:scale-[1.01] active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-signal focus:ring-offset-2 focus:ring-offset-void"
               >
                 Send message <Send className="h-4 w-4" />
               </button>
@@ -212,20 +221,29 @@ export default function ContactSection() {
           )}
         </div>
       </motion.div>
-    </div>
+    </section>
   );
 }
 
+// Added explicit HTML attributes extending to support IDs and ARIA labels
 function Field({
   icon,
+  id,
   ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & { icon: React.ReactNode }) {
+}: React.InputHTMLAttributes<HTMLInputElement> & {
+  icon: React.ReactNode;
+  id: string;
+}) {
   return (
     <div className="relative">
+      <label htmlFor={id} className="sr-only">
+        {props["aria-label"] || props.placeholder}
+      </label>
       <div className="absolute left-4 top-3.5 text-faint">{icon}</div>
       <input
+        id={id}
         {...props}
-        className="w-full rounded-xl border border-line bg-white/5 py-3 pl-11 pr-4 text-ink placeholder-faint transition-all focus:border-signal/50 focus:outline-none"
+        className="w-full rounded-xl border border-line bg-white/5 py-3 pl-11 pr-4 text-ink placeholder-faint transition-all focus:border-signal focus:ring-1 focus:ring-signal/50 focus:outline-none"
       />
     </div>
   );
