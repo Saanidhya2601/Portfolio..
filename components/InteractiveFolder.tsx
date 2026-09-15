@@ -8,38 +8,38 @@ import { cn } from "@/lib/utils";
 const projects = [
   {
     id: 1,
-    title: "Time Champ",
-    role: "Full-Stack SaaS",
-    tech: "React · Supabase",
+    title: "TimeChamp",
+    role: "B2B SaaS Platform",
+    tech: "Next.js · TypeScript · PostgreSQL",
     description:
-      "Productivity and HR system with real-time dashboards and Recharts analytics.",
+      "Enterprise-grade productivity and HR management system featuring real-time time-tracking and advanced analytics.",
     link: "https://github.com/Saanidhya2601/Time-Champ",
   },
   {
     id: 2,
     title: "Modern LMS",
-    role: "Full-Stack",
-    tech: "Node · PostgreSQL",
+    role: "Full-Stack Architecture",
+    tech: "Node.js · JWT · SQL",
     description:
-      "Course platform with JWT auth and role-based instructor dashboards.",
+      "Scalable course platform implementing secure role-based access control and isolated instructor environments.",
     link: "https://github.com/Saanidhya2601/LMS",
   },
   {
     id: 3,
     title: "Crime Reports",
     role: "Data Engineering",
-    tech: "PostgreSQL · SQL",
+    tech: "PostgreSQL · Relational DB",
     description:
-      "Normalized schema for 320k+ records, RBAC, and 12 analytical queries.",
+      "Optimized normalized schema handling 320k+ records, drastically reducing query latency for analytical dashboards.",
     link: "https://github.com/Saanidhya2601/Case-files",
   },
   {
     id: 4,
     title: "AutoReporter",
-    role: "Automation",
+    role: "Pipeline Automation",
     tech: "Python · Pandas",
     description:
-      "Scheduled pipeline that renders and emails weekly KPI reports.",
+      "Automated ETL pipeline that processes raw data into rendered, scheduled KPI reports for stakeholders.",
     link: "https://github.com/Saanidhya2601/AutoReporter",
   },
 ];

@@ -17,9 +17,9 @@
   --color-signal-dim: #2dd4bf;
   --color-indigo: #818cf8;
 
-  --font-display: "Space Grotesk", "Plus Jakarta Sans", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-display: var(--font-display), "Plus Jakarta Sans", sans-serif;
+  --font-body: var(--font-body), sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
 
   --animate-marquee: marquee 28s linear infinite;
   --animate-grid-pulse: grid-pulse 3.6s ease-in-out infinite;
@@ -58,6 +58,7 @@
 }
 
 html {
+  font-size: clamp(1rem, 0.9545rem + 0.2273vw, 1.125rem);
   scroll-behavior: smooth;
   background: var(--color-void);
 }

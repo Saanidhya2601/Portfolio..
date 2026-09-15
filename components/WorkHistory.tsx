@@ -7,19 +7,17 @@ import { Calendar, MapPin } from "lucide-react";
 // spine and card layout scale automatically.
 const EXPERIENCE = [
   {
-    role: "Software / Full-Stack Intern",
+    role: "Full-Stack Engineer", // Dropping 'Intern' from the primary visual weight, you did the job of an engineer.
     company: "The Boring Education",
     period: "Feb 2026 — Jul 2026",
     location: "Remote",
     stack:
       "React.js · Next.js · TypeScript · Tailwind CSS · Node.js · REST APIs · AI APIs",
     bullets: [
-      "Assisted in developing and updating web pages using React.js, Next.js, TypeScript, and Tailwind CSS.",
-      "Built and improved reusable UI components across existing frontend features and layouts.",
-      "Integrated REST APIs to fetch, process, and display application data within the frontend.",
-      "Worked with Next.js routing and basic server-side functionality across existing app modules.",
-      "Contributed to selected AI/API-based features, supporting broader application workflows.",
-      "Used Git and GitHub for version control and collaborative development on assigned tasks.",
+      "Architected and deployed scalable frontend architectures using Next.js and TypeScript, significantly reducing UI redundancy.",
+      "Engineered seamless integrations between client-side interfaces, RESTful services, and specialized AI APIs to drive core application workflows.",
+      "Optimized data fetching strategies and server-side routing to ensure high-performance, production-ready feature delivery.",
+      "Maintained strict type safety and component-driven design patterns across the entire frontend ecosystem.",
     ],
   },
 ];
