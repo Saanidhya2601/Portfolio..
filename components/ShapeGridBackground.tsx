@@ -2,16 +2,6 @@
 
 import { useEffect, useMemo, useRef } from "react";
 
-/**
- * A fixed, full-viewport blueprint grid that sits behind every section.
- * It's the page's signature element: a nod to "normalized databases" and
- * "type-safe architecture" — the site is literally built on a schema.
- *
- * - A faint hairline grid, always present.
- * - A soft radial spotlight that follows the pointer (desktop only).
- * - A handful of grid-intersection nodes that pulse on independent,
- *   randomized loops, like activity pings on a schema diagram.
- */
 export default function ShapeGridBackground() {
   const spotlightRef = useRef<HTMLDivElement>(null);
 
@@ -26,9 +16,8 @@ export default function ShapeGridBackground() {
     return () => window.removeEventListener("pointermove", handle);
   }, []);
 
-  // Deterministic pseudo-random node positions so server/client match.
   const nodes = useMemo(() => {
-    const cell = 56; // must match bg-size below
+    const cell = 56;
     const seedPositions = [
       [4, 3],
       [11, 2],
@@ -55,9 +44,9 @@ export default function ShapeGridBackground() {
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-void"
     >
-      {/* Hairline schema grid */}
+      {/* Reduced opacity from 0.35 to 0.20 to improve text contrast on top */}
       <div
-        className="absolute inset-0 opacity-[0.35]"
+        className="absolute inset-0 opacity-[0.20]"
         style={{
           backgroundImage:
             "linear-gradient(to right, var(--color-line) 1px, transparent 1px), linear-gradient(to bottom, var(--color-line) 1px, transparent 1px)",
@@ -69,11 +58,10 @@ export default function ShapeGridBackground() {
         }}
       />
 
-      {/* Pulsing schema nodes */}
       {nodes.map((n, i) => (
         <span
           key={i}
-          className="absolute h-1 w-1 rounded-full bg-signal animate-grid-pulse"
+          className="absolute h-1 w-1 rounded-full bg-signal animate-grid-pulse shadow-[0_0_8px_var(--color-signal)]"
           style={{
             left: n.left,
             top: n.top,
@@ -82,7 +70,6 @@ export default function ShapeGridBackground() {
         />
       ))}
 
-      {/* Cursor spotlight */}
       <div
         ref={spotlightRef}
         className="absolute inset-0 hidden md:block transition-opacity duration-500"
@@ -91,12 +78,11 @@ export default function ShapeGridBackground() {
             "--x": "50%",
             "--y": "20%",
             background:
-              "radial-gradient(600px circle at var(--x) var(--y), color-mix(in srgb, var(--color-indigo) 10%, transparent), transparent 70%)",
+              "radial-gradient(600px circle at var(--x) var(--y), color-mix(in srgb, var(--color-indigo) 8%, transparent), transparent 70%)",
           } as React.CSSProperties
         }
       />
 
-      {/* Vignette to keep edges quiet */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_100%_60%_at_50%_0%,transparent_0%,var(--color-void)_85%)]" />
     </div>
   );
